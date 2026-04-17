@@ -11,8 +11,6 @@ export async function POST(req: Request) {
     if (!signature) {
       return Response.json({ error: 'No signature' }, { status: 400 })
     }
-
-    // Verify signature
     const expected = crypto
       .createHmac('sha256', process.env.RAZORPAY_WEBHOOK_SECRET!)
       .update(body)
@@ -30,31 +28,32 @@ export async function POST(req: Request) {
 
       await connectDB()
 
-      // Find and activate the subscription
-      const sub = await Subscription.findOneAndUpdate(
-        { 
-          razorpayOrderId: order_id, 
-          status: 'pending'           // idempotency guard
-        },
-        {
-          razorpayPaymentId: payment_id,
-          status:   'active',
-          startsAt: new Date(),
-          endsAt:   new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
-        },
-        { new: true }
-      )
-      .populate('userId')
-      .populate('planId')
+      // Step 1 — find with plan populated to get durationDays
+      const sub = await Subscription.findOne({
+        razorpayOrderId: order_id,
+        status: 'pending',
+      }).populate('planId')
 
       if (!sub) {
         console.log('Subscription not found or already activated')
         return Response.json({ received: true })
       }
 
+      const durationDays = (sub.planId as any).durationDays || 30
+
+      // Step 2 — update with correct endsAt
+      await Subscription.findByIdAndUpdate(sub._id, {
+        razorpayPaymentId: payment_id,
+        status:   'active',
+        startsAt: new Date(),
+        endsAt:   new Date(Date.now() + durationDays * 24 * 60 * 60 * 1000),
+      })
+
+      // Step 3 — populate user for notification
+      await sub.populate('userId')
       console.log('Subscription activated for:', (sub.userId as any).email)
 
-      // Notify owner on WhatsApp
+      // Step 4 — notify owner
       await notifyOwner(sub)
     }
 
