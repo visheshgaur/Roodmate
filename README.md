@@ -40,6 +40,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 The backend has 4 distinct flows:
 Flow A — Signup: User signs up → Clerk fires webhook → your backend saves user to MongoDB automatically.
+
 Flow B — Plans: User visits plans page → frontend calls GET /api/plans → MongoDB returns all active plans → shown as cards on UI.
+
 Flow C — Payment: User clicks pay → POST /api/pay creates a Razorpay order and saves a pending subscription → returns orderId to frontend → Razorpay popup opens → user pays.
+
 Flow D — Activation: Razorpay fires payment.captured webhook → signature verified → pending subscription found → status changed to active → startsAt and endsAt set using plan.durationDays → WhatsApp sent to owner → notifiedAt saved.
