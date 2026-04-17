@@ -39,6 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## BACKEND FLOW .....
 
 The backend has 4 distinct flows:
+
 Flow A — Signup: User signs up → Clerk fires webhook → your backend saves user to MongoDB automatically.
 
 Flow B — Plans: User visits plans page → frontend calls GET /api/plans → MongoDB returns all active plans → shown as cards on UI.
