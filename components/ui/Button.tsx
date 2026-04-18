@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'simple';
   children: React.ReactNode;
 }
 
@@ -20,6 +20,9 @@ const styles = {
 
   ghost:
     "text-[#005248] hover:bg-[#FFA500]/20 cursor-pointer",
+
+  simple:
+  "bg-transparent border border-white text-white px-6 py-2 rounded-md transition-all duration-300 hover:bg-[#e69500] hover:text-white hover:border-none cursor-pointer"
 };
   return (
     <button 

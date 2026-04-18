@@ -16,7 +16,7 @@ export const Header = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="fixed top-0 w-full z-[999] bg-white border-b border-gray-100 shadow-sm">
+    <header className="fixed top-0 w-full z-[999] bg-white border-b border-gray-100 shadow-sm md:px-4">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         
         {/* Logo */}
@@ -76,7 +76,7 @@ export const Header = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden z-50 p-2 text-gray-700 z-[999]"
+          className="lg:hidden  p-2 text-gray-700 z-[999]"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
