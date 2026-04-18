@@ -4,7 +4,7 @@ import Image from "next/image";
 export const Hero = () => {
   return (
    
-    <section className="hero-section flex flex-wrap items-center justify-between px-4 pt-15 lg:px-8 min-h-[80vh] md:min-h-screen overflow-hidden">
+    <section className="hero-section flex flex-wrap items-center justify-between px-4 pt-15 lg:px-8 min-h-[80vh] md:min-h-screen overflow-hidden relative">
       {/* LEFT CONTENT */}
       <div className="flex flex-col items-start text-left max-w-2xl gap-1">
         <p className="body-text text-base text-[#9AA813] font-semibold mb-4">
@@ -39,12 +39,12 @@ export const Hero = () => {
       {/* RIGHT CONTENT */}
      {/* RIGHT CONTENT */}
 <div className="flex w-full md:w-1/2 justify-center md:justify-end items-end mt-10 md:mt-0">
-  <div className="w-[320px] sm:w-[450px] md:w-[600px] lg:w-[750px]">
+  <div className="w-[280px] sm:w-[400px] md:w-[450px] lg:w-[650px] md:relative lg:absolute bottom-0 right-0">
     <Image
       src="/delivery-boy.webp"
       alt="delivery boy"
-      width={750}
-      height={750}
+      width={700}
+      height={700}
       priority
       className="w-full h-auto drop-shadow-2xl -mb-4"
     />
