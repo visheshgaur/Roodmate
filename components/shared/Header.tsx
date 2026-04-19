@@ -4,7 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { UserButton, SignInButton, useUser } from "@clerk/nextjs";
+import { UserButton, SignInButton, useUser, SignUpButton } from "@clerk/nextjs";
 import { Menu, X, LogIn } from "lucide-react"; // Added LogIn icon for consistency
 import Image from "next/image";
 
@@ -35,7 +35,7 @@ export const Header = () => {
           <Link href="/" className="text-[#84A221]">Home</Link>
           <Link href="/about" className="hover:text-[#84A221] transition">About</Link>
           <Link href="/menu" className="hover:text-[#84A221] transition">Menu</Link>
-          <Link href="#plans" className="hover:text-[#84A221] transition">Subscription Plan</Link>
+          <Link href="/plans" className="hover:text-[#84A221] transition">Subscription Plan</Link>
           <Link href="/contact" className="hover:text-[#84A221] transition">Contact</Link>
         </nav>
 
@@ -51,16 +51,17 @@ export const Header = () => {
                   Login
                   <LogIn size={20} />
                 </Button>
-              </SignInButton>
-
-              <Link href="/sign-up">
-                <Button
+              </SignInButton >
+              <SignUpButton mode="modal">
+                 <Button
                   variant="secondary"
                   className="border-none rounded-md px-5 py-2"
                 >
                   Sign up
                 </Button>
-              </Link>
+              </SignUpButton>
+
+              
             </div>
           )}
 
@@ -129,15 +130,23 @@ export const Header = () => {
                   Login <LogIn size={20} />
                 </Button>
               </SignInButton>
+              <SignUpButton mode="modal">
+                <Button
+                  variant="secondary"
+                  className="border border-gray-200 rounded-md w-full py-2 text-lg"
+                >
+                  SignUp 
+                </Button>
+              </SignUpButton>
 
-              <Link href="/sign-up" onClick={closeMenu}>
+              {/* <Link href="/sign-up" onClick={closeMenu}>
                 <Button
                   variant="secondary"
                   className="border border-gray-200 rounded-md w-full py-2 text-lg"
                 >
                   Sign up
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           ) : (
             <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">

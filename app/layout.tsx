@@ -1,10 +1,13 @@
 
 
 import type { Metadata } from "next";
-import { Poppins , Baloo_2 } from "next/font/google";
+import { Poppins , Baloo_2, Geist } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Header } from "@/components/shared/Header";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,15 +29,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full antialiased">
+     <ClerkProvider>
+    <html lang="en" className={cn("h-full antialiased", "font-sans", geist.variable)}>
       <body className={`min-h-full flex flex-col ${poppins.className} ${baloo.variable}`}>
-        <ClerkProvider>
+       
           <Header />
           <main className="pt-15">{children}</main>
-        </ClerkProvider>
+        
 
         <script src="https://checkout.razorpay.com/v1/checkout.js" />
       </body>
     </html>
+    </ClerkProvider>
   );
 }
