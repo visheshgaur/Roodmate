@@ -63,6 +63,9 @@
 .mypara{
   color: #005248 !important;
 }
+h3.flex button {
+    align-items: center !important;
+}
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
