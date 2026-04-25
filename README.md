@@ -47,3 +47,30 @@ Flow B — Plans: User visits plans page → frontend calls GET /api/plans → M
 Flow C — Payment: User clicks pay → POST /api/pay creates a Razorpay order and saves a pending subscription → returns orderId to frontend → Razorpay popup opens → user pays.
 
 Flow D — Activation: Razorpay fires payment.captured webhook → signature verified → pending subscription found → status changed to active → startsAt and endsAt set using plan.durationDays → WhatsApp sent to owner → notifiedAt saved.
+
+
+
+
+User clicks "Get a Subscription" on Basic Plan
+        ↓
+handleSubscribe(basicPlanId) called
+        ↓
+POST /api/pay { planId: basicPlanId }
+        ↓
+Backend finds user (from Clerk session)
+Backend finds plan (from MongoDB by planId)
+Creates Razorpay order for ₹2,999
+Saves PENDING subscription in MongoDB
+        ↓
+Returns orderId to frontend
+        ↓
+Razorpay popup opens pre-filled with ₹2,999
+        ↓
+User pays
+        ↓
+Razorpay webhook fires
+Subscription set to ACTIVE
+endsAt = today + 30 days
+        ↓
+WhatsApp sent to owner
+User redirected to /dashboard

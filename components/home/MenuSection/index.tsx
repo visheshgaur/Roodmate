@@ -15,7 +15,7 @@ export const MenuSection = () => {
   return (
     <section className="py-10 px-5 md:px-10 md:py-20 bg-white">
       {/* HEADER SECTION */}
-      <div className="flex flex-col items-center text-center mb-12">
+      <div className="flex flex-col items-center text-center mb-10">
         <p className="text-[#9AA813] font-bold tracking-[0.2em] text-sm mb-2 uppercase">
           Menu
         </p>
@@ -46,7 +46,7 @@ export const MenuSection = () => {
         {categories.map((cat) => (
           <TabsContent key={cat} value={cat} className="w-full outline-none">
             {/* THE RESPONSIVE GRID */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mt-10">
               {getItemsByCategory(cat).map((item) => (
                 <MenuCard key={item.id} item={item} />
               ))}

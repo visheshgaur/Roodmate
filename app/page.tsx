@@ -1,5 +1,6 @@
 import { Aboutus } from "@/components/home/Aboutus";
 import { Faqs } from "@/components/home/Faqs";
+import { Foodquality } from "@/components/home/Foodquality";
 import { Hero } from "@/components/home/Hero";
 import { MenuSection } from "@/components/home/MenuSection";
 import Footer from "@/components/shared/Footer";
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero/>
       <MenuSection/>
       <Aboutus/>
+      <Foodquality/>
       <Faqs/>
       <Footer/>
       

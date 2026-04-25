@@ -12,7 +12,7 @@ export const FOOD_ITEMS: FoodItem[] = [
     name: "Aloo Paratha",
     category: "Breakfast",
     rating: 5,
-    image: "/aloo-paratha.webp", // Ensure these are in your public folder
+    image: "/aloo-paratha.webp", 
   },
   {
     id: "2",
