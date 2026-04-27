@@ -1,7 +1,7 @@
+import { InnerBanner } from "@/components/shared/InnerBanner";
+
 export default function AboutPage() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold">About Page Coming Soon!</h1>
-    </div>
+   <InnerBanner heading="About"/>
   );
 }

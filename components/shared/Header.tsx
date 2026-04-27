@@ -7,20 +7,28 @@ import { Button } from "@/components/ui/Button";
 import { UserButton, SignInButton, useUser, SignUpButton } from "@clerk/nextjs";
 import { Menu, X, LogIn } from "lucide-react"; // Added LogIn icon for consistency
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const { isSignedIn } = useUser();
   const [isOpen, setIsOpen] = useState(false);
+  const pathname=usePathname()
 
-  // Helper to close menu when link is clicked
+
+ 
   const closeMenu = () => setIsOpen(false);
+  const getLinkClass = (path: string) => {
+  return pathname === path
+    ? "text-[#84A221]"
+    : "hover:text-[#84A221] transition";
+};
 
   return (
     <header className="fixed top-0 w-full z-[999] bg-white border-b border-gray-100 shadow-sm md:px-4">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
         
         {/* Logo */}
-        <Link href="/">
+        <Link href="/" >
           <Image
             src="/logo-roodmates.png"
             alt="ROODMATES Logo"
@@ -32,11 +40,11 @@ export const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8 text-[15px] font-semibold text-gray-700">
-          <Link href="/" className="text-[#84A221]">Home</Link>
-          <Link href="/about" className="hover:text-[#84A221] transition">About</Link>
-          <Link href="/menu" className="hover:text-[#84A221] transition">Menu</Link>
-          <Link href="/plans" className="hover:text-[#84A221] transition">Subscription Plan</Link>
-          <Link href="/contact" className="hover:text-[#84A221] transition">Contact</Link>
+         <Link href="/" className={getLinkClass("/")}>Home</Link>
+          <Link href="/about" className={getLinkClass("/about")}>About</Link>
+          <Link href="/menu" className={getLinkClass("/menu")}>Menu</Link>
+          <Link href="/plans" className={getLinkClass("/plans")}>Subscription Plan</Link>
+          <Link href="/contact" className={getLinkClass("/contact")}>Contact</Link>
         </nav>
 
         {/* Desktop Actions */}
