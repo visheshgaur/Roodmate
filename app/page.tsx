@@ -3,6 +3,8 @@ import { Faqs } from "@/components/home/Faqs";
 import { Foodquality } from "@/components/home/Foodquality";
 import { Hero } from "@/components/home/Hero";
 import { MenuSection } from "@/components/home/MenuSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+
 import Footer from "@/components/shared/Footer";
 
 export default function Home() {
@@ -13,6 +15,7 @@ export default function Home() {
       <MenuSection/>
       <Aboutus/>
       <Foodquality/>
+      <TestimonialsSection/>
       <Faqs/>
       <Footer/>
       
