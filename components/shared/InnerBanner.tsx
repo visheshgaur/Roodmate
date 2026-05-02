@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 export const InnerBanner= ({heading}:{heading:string}) => {
   return (
@@ -21,19 +22,19 @@ export const InnerBanner= ({heading}:{heading:string}) => {
 
     
         <div className="flex flex-col sm:flex-row mt-4 gap-[20px] w-full sm:w-auto">
-          <Button
+          <Link href="/subscription-plan"><Button
             variant="secondary"
             className="border rounded-md py-4 px-6 text-md font-semibold"
           >
             Get a Subscription
-          </Button>
+          </Button></Link>
 
-          <Button
+          <Link href="/menu"><Button
             variant="simple"
             className="border rounded-md py-4 px-6 text-md font-semibold"
           >
             See Menu
-          </Button>
+          </Button></Link>
         </div>
       </div>
 

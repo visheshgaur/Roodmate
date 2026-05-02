@@ -43,7 +43,7 @@ export const Header = () => {
          <Link href="/" className={getLinkClass("/")}>Home</Link>
           <Link href="/about" className={getLinkClass("/about")}>About</Link>
           <Link href="/menu" className={getLinkClass("/menu")}>Menu</Link>
-          <Link href="/plans" className={getLinkClass("/plans")}>Subscription Plan</Link>
+          <Link href="/subscription-plan" className={getLinkClass("/plans")}>Subscription Plan</Link>
           <Link href="/contact" className={getLinkClass("/contact")}>Contact</Link>
         </nav>
 
