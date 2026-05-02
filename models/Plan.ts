@@ -6,7 +6,9 @@ export interface IPlan extends Document {
   price: number       // in paise (₹ × 100)
   durationDays: number
   meals: string[]
-  isActive: boolean
+  isActive: boolean,
+  billing: 'weekly' | 'monthly'
+
 }
 
 const PlanSchema = new Schema<IPlan>(
@@ -17,6 +19,7 @@ const PlanSchema = new Schema<IPlan>(
     durationDays: { type: Number, required: true },
     meals:        [{ type: String }],
     isActive:     { type: Boolean, default: true },
+    billing:      { type: String, enum: ['weekly', 'monthly'], default: 'weekly' },
   },
   { timestamps: true }
 )
