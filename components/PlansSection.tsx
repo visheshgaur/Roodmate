@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
+import { error } from 'console'
+import { toast } from 'sonner'
 
 interface Plan {
   _id: string
@@ -30,7 +32,9 @@ export default function PlansSection() {
           setAllPlans(data.plans)
         }
       })
-      .catch(err => console.error('Failed to fetch plans:', err))
+      .catch((err)=>{
+        toast.error("Something went wrong");
+      })
   }, [])
 
   // Filter plans by selected billing type
@@ -58,7 +62,7 @@ export default function PlansSection() {
       const data = await res.json()
 
       if (!data.success) {
-        alert(data.error)
+        toast.error(data.error)
         return
       }
 
@@ -85,7 +89,7 @@ export default function PlansSection() {
       razorpay.open()
     } catch (error) {
       console.error(error)
-      alert('Something went wrong. Please try again.')
+      toast.error('Something went wrong. Please try again.')
     } finally {
       setLoadingId(null)
     }

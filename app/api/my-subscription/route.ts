@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/mongodb'
 import User from '@/models/User'
 import Subscription from '@/models/Subscription'
 
+
 export async function GET() {
   try {
     const { userId } = await auth()
@@ -24,12 +25,14 @@ export async function GET() {
     }).populate('planId')
 
     if (!subscription) {
+      
       return Response.json({ success: true, subscription: null })
     }
 
     return Response.json({ success: true, subscription })
 
   } catch (error: any) {
+    
     return Response.json({ error: error.message }, { status: 500 })
   }
 }
