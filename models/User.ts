@@ -5,6 +5,13 @@ export interface IUser extends Document {
   email: string
   name: string
   phone?: string
+  address?: {
+    line1: string
+    line2?: string
+    city: string
+    state: string
+    pincode: string
+  }
   createdAt: Date
 }
 
@@ -14,6 +21,13 @@ const UserSchema = new Schema<IUser>(
     email:   { type: String, required: true },
     name:    { type: String, required: true },
     phone:   { type: String },
+    address: {
+      line1:   { type: String },
+      line2:   { type: String },
+      city:    { type: String },
+      state:   { type: String },
+      pincode: { type: String },
+    },
   },
   { timestamps: true }
 )

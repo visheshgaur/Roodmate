@@ -17,16 +17,25 @@ interface Subscription {
   razorpayPaymentId: string
   planId: Plan
 }
+interface Address {
+  line1: string
+  line2: string
+  city: string
+  state: string
+  pincode: string
+}
 
 export default function Dashboard() {
   const [subscription, setSubscription] = useState<Subscription | null>(null)
   const [loading, setLoading] = useState(true)
+  const [address, setAddress] = useState<Address | null>(null)
 
   useEffect(() => {
     fetch('/api/my-subscription')
       .then(res => res.json())
       .then(data => {
         setSubscription(data.subscription)
+        setAddress(data.address)
         setLoading(false)
       })
       .catch(() => setLoading(false))
@@ -168,7 +177,21 @@ export default function Dashboard() {
                   />
                 </div>
               </div>
-
+{address && (
+  <div className="px-8 pb-6 border-t border-gray-100 pt-4">
+    <p className="text-gray-400 text-xs uppercase tracking-wider mb-2">
+      Delivery Address
+    </p>
+    {/* <p className="text-gray-700 text-sm">
+      {address.line1}{address.line2 ? `, ${address.line2}` : ''}<br />
+      {address.city}, {address.state} - {address.pincode}
+    </p> */}
+    <p className="text-gray-700 text-sm">
+      {address.line1}{address.line2 ? `, ${address.line2}` : ''}<br />
+      {address.city}, {address.state} - {address.pincode}
+    </p>
+  </div>
+)}
               {/* Payment ID */}
               <div className="px-8 pb-6 border-t border-gray-100 pt-4">
                 <p className="text-gray-400 text-xs">
@@ -180,6 +203,9 @@ export default function Dashboard() {
           )}
 
         </div>
+        {/* Delivery Address */}
+
+       
       </section>
       <Footer/>
     </>

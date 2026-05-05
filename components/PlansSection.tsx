@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
 import { error } from 'console'
 import { toast } from 'sonner'
+import AddressModal from '@/components/AddressModal'
+
 
 interface Plan {
   _id: string
@@ -17,6 +19,8 @@ interface Plan {
 }
 
 export default function PlansSection() {
+  const [modalOpen, setModalOpen] = useState(false)
+const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null)
   const [billing, setBilling] = useState<'weekly' | 'monthly'>('weekly')
   const [allPlans, setAllPlans] = useState<Plan[]>([])
   const [loadingId, setLoadingId] = useState<string | null>(null)
@@ -44,58 +48,113 @@ export default function PlansSection() {
     return `₹${(paise / 100).toLocaleString('en-IN')}`
   }
 
+  // async function handleSubscribe(plan: Plan) {
+  //   if (!isSignedIn) {
+  //     router.push('/sign-in')
+  //     return
+  //   }
+
+  //   setLoadingId(plan._id)
+
+  //   try {
+  //     const res = await fetch('/api/pay', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ planId: plan._id }),
+  //     })
+
+  //     const data = await res.json()
+
+  //     if (!data.success) {
+  //       toast.error(data.error)
+  //       return
+  //     }
+
+  //     const options = {
+  //       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+  //       amount: data.amount,
+  //       currency: data.currency,
+  //       name: 'RoodMates',
+  //       description: `${plan.name} - ${plan.billing}`,
+  //       order_id: data.orderId,
+  //       handler: function () {
+  //         router.push('/dashboard')
+  //       },
+  //       prefill: {},
+  //       theme: { color: '#E07B00' },
+  //       modal: {
+  //         ondismiss: function () {
+  //           setLoadingId(null)
+  //         },
+  //       },
+  //     }
+
+  //     const razorpay = new (window as any).Razorpay(options)
+  //     razorpay.open()
+  //   } catch (error) {
+  //     console.error(error)
+  //     toast.error('Something went wrong. Please try again.')
+  //   } finally {
+  //     setLoadingId(null)
+  //   }
+  // }
   async function handleSubscribe(plan: Plan) {
-    if (!isSignedIn) {
-      router.push('/sign-in')
+  if (!isSignedIn) {
+    router.push('/sign-in')
+    return
+  }
+  setSelectedPlan(plan)
+  setModalOpen(true)  // open modal instead of paying directly
+}
+
+// New function — called after address confirmed
+async function handlePayment(plan: Plan) {
+  setModalOpen(false)
+  setLoadingId(plan._id)
+
+  try {
+    const res = await fetch('/api/pay', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ planId: plan._id }),
+    })
+    const data = await res.json()
+
+    if (!data.success) {
+      toast.error(data.error)
       return
     }
 
-    setLoadingId(plan._id)
-
-    try {
-      const res = await fetch('/api/pay', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId: plan._id }),
-      })
-
-      const data = await res.json()
-
-      if (!data.success) {
-        toast.error(data.error)
-        return
-      }
-
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: data.amount,
-        currency: data.currency,
-        name: 'RoodMates',
-        description: `${plan.name} - ${plan.billing}`,
-        order_id: data.orderId,
-        handler: function () {
-          router.push('/dashboard')
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount: data.amount,
+      currency: data.currency,
+      name: 'RoodMates',
+      description: plan.name,
+      order_id: data.orderId,
+      handler: function () {
+        toast.success('Subscription activated! 🎉')
+        setTimeout(() => router.push('/dashboard'), 1500)
+      },
+      theme: { color: '#E07B00' },
+      modal: {
+        ondismiss: function () {
+          setLoadingId(null)
         },
-        prefill: {},
-        theme: { color: '#E07B00' },
-        modal: {
-          ondismiss: function () {
-            setLoadingId(null)
-          },
-        },
-      }
-
-      const razorpay = new (window as any).Razorpay(options)
-      razorpay.open()
-    } catch (error) {
-      console.error(error)
-      toast.error('Something went wrong. Please try again.')
-    } finally {
-      setLoadingId(null)
+      },
     }
+
+    const razorpay = new (window as any).Razorpay(options)
+    razorpay.open()
+  } catch {
+    toast.error('Something went wrong. Please try again.')
+  } finally {
+    setLoadingId(null)
   }
+}
 
   return (
+    <>
     <section className="py-20 px-6 bg-white text-center">
 
       {/* Header */}
@@ -229,5 +288,11 @@ export default function PlansSection() {
         </div>
       )}
     </section>
+     <AddressModal
+      isOpen={modalOpen}
+      onClose={() => setModalOpen(false)}
+      onConfirm={() => selectedPlan && handlePayment(selectedPlan)}
+    />
+    </>
   )
 }

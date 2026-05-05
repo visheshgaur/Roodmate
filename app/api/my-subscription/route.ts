@@ -29,7 +29,7 @@ export async function GET() {
       return Response.json({ success: true, subscription: null })
     }
 
-    return Response.json({ success: true, subscription })
+    return Response.json({ success: true, subscription, address: user.address || null,})
 
   } catch (error: any) {
     

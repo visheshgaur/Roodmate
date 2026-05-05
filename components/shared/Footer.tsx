@@ -56,7 +56,7 @@ const Footer = () => {
             <div className="flex justify-start md:justify-end gap-4 pt-2">
               <FaFacebook className="cursor-pointer hover:text-yellow-500" />
               <FaLinkedin className="cursor-pointer hover:text-yellow-500" />
-              <FaInstagram className="cursor-pointer hover:text-yellow-500" />
+              <a href='https://www.instagram.com/roodmates'><FaInstagram className="cursor-pointer hover:text-yellow-500" /></a>
             </div>
           </div>
         </div>
