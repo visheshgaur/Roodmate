@@ -232,7 +232,6 @@ Built by **Vishesh Gaur**
 ## 📄 License
 
 This project is private and not open source.
-```
 
 ---
 
@@ -241,3 +240,9 @@ This project is private and not open source.
 If you'd like to discuss this project, collaborate, or need any help, feel free to reach out through my portfolio.
 
 🔗 Portfolio: https://devishesh.vercel.app/
+
+```
+
+
+
+
