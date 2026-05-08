@@ -1,76 +1,243 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍱 RoodMates — Food Subscription App
 
-## Getting Started
+RoodMates is a full-stack food subscription platform built for students and working professionals. Users can sign up, browse meal plans, pay securely, and get instant subscription access — while the owner receives a real-time WhatsApp notification on every new subscription.
 
-First, run the development server:
+---
+
+## 💡 Why RoodMates?
+
+RoodMates was built to simplify affordable meal subscriptions for students and working professionals who struggle with daily meal management. The platform automates subscriptions, payments, and owner notifications in real time.
+
+---
+
+## 🚀 Live Demo
+
+> Coming soon after deployment
+
+---
+
+## ✨ Features
+
+- 🔐 **Authentication** — Sign up / Sign in via Clerk (Email + Google OAuth)
+- 🍽️ **Meal Plans** — Weekly and Monthly plans (Basic, Standard, Premium)
+- 💳 **Payments** — Secure Razorpay integration with webhook verification
+- ✅ **Instant Activation** — Subscription activates immediately after payment
+- 📍 **Delivery Address** — Collected before checkout and stored per user
+- 📲 **WhatsApp Notifications** — Owner notified instantly on every new subscription
+- 📊 **Dashboard** — Users can view their active plan, expiry date, and delivery address
+- 🔄 **Billing Toggle** — Switch between Weekly and Monthly pricing
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Authentication | Clerk |
+| Database | MongoDB Atlas |
+| ODM | Mongoose |
+| Payments | Razorpay |
+| Notifications | WhatsApp (Meta Cloud API) |
+| Toasts | Sonner |
+| Hosting | Vercel |
+
+---
+
+## 📁 Project Structure
+
+```
+food-app/
+├── app/
+│   ├── api/
+│   │   ├── plans/route.ts               # Fetch all active plans
+│   │   ├── pay/route.ts                 # Create Razorpay order
+│   │   ├── my-subscription/route.ts     # Fetch user's active subscription
+│   │   ├── user/
+│   │   │   └── address/route.ts         # Get & save delivery address
+│   │   └── webhooks/
+│   │       ├── clerk/route.ts           # Sync Clerk user to MongoDB
+│   │       └── razorpay/route.ts        # Verify payment & activate subscription
+│   ├── sign-in/[[...sign-in]]/
+│   ├── sign-up/[[...sign-up]]/
+│   ├── dashboard/
+│   ├── subscription-plan/
+│   ├── contact/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── home/
+│   │   ├── Hero.tsx
+│   │   ├── PlansSection.tsx
+│   │   └── ...
+│   ├── shared/
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   └── InnerBanner.tsx
+│   └── AddressModal.tsx
+├── lib/
+│   ├── mongodb.ts                        # MongoDB connection utility
+│   └── notify.ts                         # WhatsApp notification
+├── models/
+│   ├── User.ts                           # User schema
+│   ├── Plan.ts                           # Plan schema
+│   └── Subscription.ts                   # Subscription schema
+├── middleware.ts                          # Clerk route protection
+└── .env.local                            # Environment variables
+```
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/roodmates.git
+cd roodmates
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root:
+
+```env
+# MongoDB
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/...
+
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+CLERK_WEBHOOK_SECRET=...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/...
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/...
+# Razorpay
+RAZORPAY_KEY_ID=rzp_test_...
+RAZORPAY_KEY_SECRET=...
+RAZORPAY_WEBHOOK_SECRET=...
+NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
+
+# WhatsApp (Meta Cloud API)
+WHATSAPP_PHONE_ID=...
+WHATSAPP_TOKEN=...
+OWNER_WHATSAPP_NUMBER=91XXXXXXXXXX
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🗄️ Database Setup
 
-## Learn More
+### MongoDB Plans (insert in MongoDB Compass)
 
-To learn more about Next.js, take a look at the following resources:
+**Weekly Plans:**
+```json
+{ "name": "Basic Plan", "description": "Lunch Only", "price": 55000, "durationDays": 7, "meals": ["Lunch"], "isActive": true, "billing": "weekly" }
+{ "name": "Standard Plan", "description": "Dinner Only", "price": 55000, "durationDays": 7, "meals": ["Dinner"], "isActive": true, "billing": "weekly" }
+{ "name": "Premium Plan", "description": "Lunch + Dinner", "price": 105000, "durationDays": 7, "meals": ["Lunch", "Dinner"], "isActive": true, "billing": "weekly" }
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Monthly Plans:**
+```json
+{ "name": "Basic Plan", "description": "Lunch Only", "price": 220000, "durationDays": 30, "meals": ["Lunch"], "isActive": true, "billing": "monthly" }
+{ "name": "Standard Plan", "description": "Dinner Only", "price": 220000, "durationDays": 30, "meals": ["Dinner"], "isActive": true, "billing": "monthly" }
+{ "name": "Premium Plan", "description": "Lunch + Dinner", "price": 420000, "durationDays": 30, "meals": ["Lunch", "Dinner"], "isActive": true, "billing": "monthly" }
+```
+Note-: All Plans are in paise for razorpay compatibility ...
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔄 Application Flow
 
-## Deploy on Vercel
+```
+User signs up (Clerk)
+      ↓
+Clerk webhook → User saved to MongoDB
+      ↓
+User browses plans (GET /api/plans)
+      ↓
+User selects a plan → Address modal opens
+      ↓
+User enters delivery address → Saved to MongoDB
+      ↓
+POST /api/pay → Razorpay order created → Pending subscription saved
+      ↓
+Razorpay checkout opens → User pays
+      ↓
+Razorpay webhook → Signature verified → Subscription activated
+      ↓
+WhatsApp notification sent to owner
+      ↓
+User redirected to dashboard
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Deployment
 
+### Deploy to Vercel
 
-## BACKEND FLOW .....
+```bash
+# Push to GitHub first
+git add .
+git commit -m "initial commit"
+git push
 
-The backend has 4 distinct flows:
+# Then import to Vercel at vercel.com
+# Add all environment variables in Vercel dashboard
+```
 
-Flow A — Signup: User signs up → Clerk fires webhook → your backend saves user to MongoDB automatically.
+### After deployment update:
+1. **Clerk webhook URL** → `https://yourapp.vercel.app/api/webhooks/clerk`
+2. **Razorpay webhook URL** → `https://yourapp.vercel.app/api/webhooks/razorpay`
+3. **Switch Razorpay to live mode** → replace `rzp_test_` keys with `rzp_live_` keys
 
-Flow B — Plans: User visits plans page → frontend calls GET /api/plans → MongoDB returns all active plans → shown as cards on UI.
+---
 
-Flow C — Payment: User clicks pay → POST /api/pay creates a Razorpay order and saves a pending subscription → returns orderId to frontend → Razorpay popup opens → user pays.
+## 📋 Pre-launch Checklist
 
-Flow D — Activation: Razorpay fires payment.captured webhook → signature verified → pending subscription found → status changed to active → startsAt and endsAt set using plan.durationDays → WhatsApp sent to owner → notifiedAt saved.
+- [ ] Deploy to Vercel
+- [ ] Update Clerk webhook URL
+- [ ] Update Razorpay webhook URL  
+- [ ] Switch to Razorpay live keys
+- [ ] Set up WhatsApp Meta Cloud API
+- [ ] Delete test data from MongoDB
+- [ ] Remove test payment page
+- [ ] Add subscription expiry cron job
+- [ ] Test full flow end to end in production
 
+---
 
+## 👨‍💻 Author
 
+Built by **Vishesh Gaur**
 
-User clicks "Get a Subscription" on Basic Plan
-        ↓
-handleSubscribe(basicPlanId) called
-        ↓
-POST /api/pay { planId: basicPlanId }
-        ↓
-Backend finds user (from Clerk session)
-Backend finds plan (from MongoDB by planId)
-Creates Razorpay order for ₹2,999
-Saves PENDING subscription in MongoDB
-        ↓
-Returns orderId to frontend
-        ↓
-Razorpay popup opens pre-filled with ₹2,999
-        ↓
-User pays
-        ↓
-Razorpay webhook fires
-Subscription set to ACTIVE
-endsAt = today + 30 days
-        ↓
-WhatsApp sent to owner
-User redirected to /dashboard
+---
+
+## 📄 License
+
+This project is private and not open source.
+```
+
+---
+
+## 📬 Let's Connect
+
+If you'd like to discuss this project, collaborate, or need any help, feel free to reach out through my portfolio.
+
+🔗 Portfolio: https://devishesh.vercel.app/

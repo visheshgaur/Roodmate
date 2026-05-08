@@ -48,9 +48,9 @@ const Footer = () => {
           <div className="md:text-right space-y-4">
             <h3 className="text-xl font-bold border-b-2 border-yellow-500 w-fit md:ml-auto pb-1">Contact Info.</h3>
             <div className="text-gray-200 space-y-1">
-              <p>Phone: 843-312-9332</p>
-              <p>Phone: 798-352-5274</p>
-              <p>Email: roodmates@gmail.com</p>
+              <a href='tel:8433129332'><p>Phone: 843-312-9332</p></a>
+              <a href='tel:7983525274'><p>Phone: 798-352-5274</p></a>
+              <a href='mailto:roodmates@gmail.com'><p>Email: roodmates@gmail.com</p></a>
             </div>
             {/* Social Icons */}
             <div className="flex justify-start md:justify-end gap-4 pt-2">
