@@ -21,7 +21,7 @@ const baloo = Baloo_2({
 })
 export const metadata: Metadata = {
   title: "ROODMATES",
-  description: "Find your perfect roommate",
+  description: "Find your perfect foodmate",
 };
 
 export default function RootLayout({
