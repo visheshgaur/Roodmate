@@ -48,45 +48,62 @@ RoodMates was built to simplify affordable meal subscriptions for students and w
 
 ## 📁 Project Structure
 
-```
 food-app/
 ├── app/
+│   ├── about/
+│   ├── contact/
+│   ├── dashboard/
+│   ├── menu/
+│   ├── subscription-plan/
+│   │
 │   ├── api/
-│   │   ├── plans/route.ts               # Fetch all active plans
-│   │   ├── pay/route.ts                 # Create Razorpay order
-│   │   ├── my-subscription/route.ts     # Fetch user's active subscription
+│   │   ├── plans/
+│   │   │   └── route.ts                 # Fetch all active plans
+│   │   ├── pay/
+│   │   │   └── route.ts                 # Create Razorpay order
+│   │   ├── my-subscription/
+│   │   │   └── route.ts                 # Fetch user's active subscription
 │   │   ├── user/
-│   │   │   └── address/route.ts         # Get & save delivery address
+│   │   │   └── address/
+│   │   │       └── route.ts             # Get & save delivery address
 │   │   └── webhooks/
-│   │       ├── clerk/route.ts           # Sync Clerk user to MongoDB
-│   │       └── razorpay/route.ts        # Verify payment & activate subscription
+│   │       ├── clerk/
+│   │       │   └── route.ts             # Sync Clerk user to MongoDB
+│   │       └── razorpay/
+│   │           └── route.ts             # Verify payment & activate subscription
+│   │
 │   ├── sign-in/[[...sign-in]]/
 │   ├── sign-up/[[...sign-up]]/
-│   ├── dashboard/
-│   ├── subscription-plan/
-│   ├── contact/
 │   ├── layout.tsx
-│   └── page.tsx
+│   ├── not-found.tsx                    # Custom 404 page
+│   └── page.tsx                         # Home page
+│
 ├── components/
 │   ├── home/
 │   │   ├── Hero.tsx
 │   │   ├── PlansSection.tsx
 │   │   └── ...
+│   │
 │   ├── shared/
 │   │   ├── Header.tsx
 │   │   ├── Footer.tsx
 │   │   └── InnerBanner.tsx
+│   │
 │   └── AddressModal.tsx
+│
 ├── lib/
-│   ├── mongodb.ts                        # MongoDB connection utility
-│   └── notify.ts                         # WhatsApp notification
+│   ├── mongodb.ts                       # MongoDB connection utility
+│   └── notify.ts                        # WhatsApp notification utility
+│
 ├── models/
-│   ├── User.ts                           # User schema
-│   ├── Plan.ts                           # Plan schema
-│   └── Subscription.ts                   # Subscription schema
-├── middleware.ts                          # Clerk route protection
-└── .env.local                            # Environment variables
-```
+│   ├── User.ts                          # User schema
+│   ├── Plan.ts                          # Plan schema
+│   └── Subscription.ts                  # Subscription schema
+│
+├── middleware.ts                        # Clerk route protection
+├── .env.local                           # Environment variables
+├── package.json
+└── README.md
 
 ---
 
