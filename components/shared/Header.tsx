@@ -123,7 +123,7 @@ export const Header = () => {
           <Link href="/" onClick={closeMenu} className="hover:text-[#84A221]">Home</Link>
           <Link href="/about" onClick={closeMenu} className="hover:text-[#84A221]">About</Link>
           <Link href="/menu" onClick={closeMenu} className="hover:text-[#84A221]">Menu</Link>
-          <Link href="#plans" onClick={closeMenu} className="hover:text-[#84A221]">Subscription Plan</Link>
+          <Link href="/subscription-plan" onClick={closeMenu} className="hover:text-[#84A221]">Subscription Plan</Link>
           <Link href="/contact" onClick={closeMenu} className="hover:text-[#84A221]">Contact</Link>
           
           <div className="h-[1px] bg-gray-100 my-2" />
