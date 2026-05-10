@@ -1,12 +1,12 @@
 # 🍱 RoodMates — Food Subscription App
 
-RoodMates is a full-stack food subscription platform built for students and working professionals. Users can sign up, browse meal plans, pay securely, and get instant subscription access — while the owner receives a real-time WhatsApp notification on every new subscription.
+RoodMates is a full-stack food subscription platform built for students and working professionals. Users can sign up, browse meal plans, pay securely, and get instant subscription access — while the owner receives real-time WhatsApp notifications for every successful subscription.
 
 ---
 
-## 💡 Why RoodMates?
+## 💡 About The Project
 
-RoodMates was built to simplify affordable meal subscriptions for students and working professionals who struggle with daily meal management. The platform automates subscriptions, payments, and owner notifications in real time.
+RoodMates was built to simplify affordable daily meal subscriptions for students and working professionals. The platform streamlines subscription management, secure online payments, delivery information handling, and real-time notifications into a seamless user experience.
 
 ---
 
@@ -18,13 +18,13 @@ RoodMates was built to simplify affordable meal subscriptions for students and w
 
 ## ✨ Features
 
-- 🔐 **Authentication** — Sign up / Sign in via Clerk (Email + Google OAuth)
-- 🍽️ **Meal Plans** — Weekly and Monthly plans (Basic, Standard, Premium)
-- 💳 **Payments** — Secure Razorpay integration with webhook verification
-- ✅ **Instant Activation** — Subscription activates immediately after payment
-- 📍 **Delivery Address** — Collected before checkout and stored per user
-- 📲 **WhatsApp Notifications** — Owner notified instantly on every new subscription
-- 📊 **Dashboard** — Users can view their active plan, expiry date, and delivery address
+- 🔐 **Authentication** — Secure sign up and sign in using Clerk
+- 🍽️ **Meal Plans** — Weekly and Monthly subscription plans
+- 💳 **Payments** — Razorpay payment gateway integration
+- ✅ **Instant Activation** — Automatic subscription activation after successful payment
+- 📍 **Delivery Address Management** — User address collection and storage
+- 📲 **Real-Time Notifications** — Instant WhatsApp notifications on every new subscription
+- 📊 **Dashboard** — Subscription tracking with active plan and expiry details
 - 🔄 **Billing Toggle** — Switch between Weekly and Monthly pricing
 
 ---
@@ -40,270 +40,112 @@ RoodMates was built to simplify affordable meal subscriptions for students and w
 | Database | MongoDB Atlas |
 | ODM | Mongoose |
 | Payments | Razorpay |
-| Notifications | WhatsApp (Meta Cloud API) |
-| Toasts | Sonner |
+| Notifications | WhatsApp Cloud API |
 | Hosting | Vercel |
 
 ---
 
 ## 📁 Project Structure
 
+## 📁 Project Structure
+
 ```bash
 food-app/
 ├── app/
-│   ├── about/
-│   ├── contact/
-│   ├── dashboard/
-│   ├── menu/
-│   ├── subscription-plan/
+│   ├── about/                          # About page
+│   ├── contact/                        # Contact page
+│   ├── dashboard/                      # User dashboard
+│   ├── menu/                           # Weekly meal menu page
+│   ├── subscription-plan/              # Subscription plans page
 │   │
 │   ├── api/
 │   │   ├── plans/
-│   │   │   └── route.ts                 # Fetch all active plans
+│   │   │   └── route.ts                # Fetch all active subscription plans
+│   │   │
 │   │   ├── pay/
-│   │   │   └── route.ts                 # Create Razorpay order
+│   │   │   └── route.ts                # Create Razorpay order
+│   │   │
 │   │   ├── my-subscription/
-│   │   │   └── route.ts                 # Fetch user's active subscription
+│   │   │   └── route.ts                # Get logged-in user's subscription
+│   │   │
 │   │   ├── user/
 │   │   │   └── address/
-│   │   │       └── route.ts             # Get & save delivery address
+│   │   │       └── route.ts            # Save and fetch user delivery address
+│   │   │
 │   │   └── webhooks/
 │   │       ├── clerk/
-│   │       │   └── route.ts             # Sync Clerk user to MongoDB
+│   │       │   └── route.ts            # Sync Clerk users with MongoDB
+│   │       │
 │   │       └── razorpay/
-│   │           └── route.ts             # Verify payment & activate subscription
+│   │           └── route.ts            # Verify Razorpay payment webhook
 │   │
-│   ├── sign-in/[[...sign-in]]/
-│   ├── sign-up/[[...sign-up]]/
-│   ├── layout.tsx
-│   ├── not-found.tsx                    # Custom 404 page
-│   └── page.tsx                         # Home page
+│   ├── sign-in/[[...sign-in]]/         # Clerk sign-in route
+│   ├── sign-up/[[...sign-up]]/         # Clerk sign-up route
+│   │
+│   ├── layout.tsx                      # Root layout component
+│   ├── not-found.tsx                   # Custom 404 page
+│   └── page.tsx                        # Home page
 │
 ├── components/
 │   ├── home/
-│   │   ├── Hero.tsx
-│   │   ├── PlansSection.tsx
-│   │   └── ...
+│   │   ├── Hero.tsx                    # Landing page hero section
+│   │   ├── PlansSection.tsx            # Subscription plans UI
+│   │   └── ...                         # Additional home page components
 │   │
 │   ├── shared/
-│   │   ├── Header.tsx
-│   │   ├── Footer.tsx
-│   │   └── InnerBanner.tsx
+│   │   ├── Header.tsx                  # Global navbar/header
+│   │   ├── Footer.tsx                  # Global footer
+│   │   └── InnerBanner.tsx             # Reusable page banner
 │   │
-│   └── AddressModal.tsx
+│   └── AddressModal.tsx                # Delivery address modal
 │
 ├── lib/
-│   ├── mongodb.ts                       # MongoDB connection utility
-│   └── notify.ts                        # Email Notification Utility
+│   ├── mongodb.ts                      # MongoDB connection utility
+│   └── notify.ts                       # Notification utility (WhatsApp/Email)
 │
 ├── models/
-│   ├── User.ts                          # User schema
-│   ├── Plan.ts                          # Plan schema
-│   └── Subscription.ts                  # Subscription schema
+│   ├── User.ts                         # User schema
+│   ├── Plan.ts                         # Subscription plan schema
+│   └── Subscription.ts                 # User subscription schema
 │
-├── middleware.ts                        # Clerk route protection
-├── .env.local                           # Environment variables
-├── package.json
-└── README.md
+├── public/                             # Static assets
+├── middleware.ts                       # Clerk authentication middleware
+├── package.json                        # Project dependencies and scripts
+├── tsconfig.json                       # TypeScript configuration
+├── tailwind.config.ts                  # Tailwind CSS configuration
+├── next.config.ts                      # Next.js configuration
+└── README.md                           # Project documentation
 ```
-
----
-
-## ⚙️ Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/roodmates.git
-cd roodmates
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Set up environment variables
-
-Create a `.env.local` file in the root:
-
-```env
-# MongoDB
-MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/...
-
-# Clerk
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
-CLERK_WEBHOOK_SECRET=...
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/...
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/...
-
-# Razorpay
-RAZORPAY_KEY_ID=rzp_test_...
-RAZORPAY_KEY_SECRET=...
-RAZORPAY_WEBHOOK_SECRET=...
-NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
-
-# Resend Keys
-RESEND_API_KEY=xxxx
-OWNER_EMAIL=xxxx
-```
-
-### 4. Run the development server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000)
-
----
-
-## 🗄️ Database Setup
-
-### MongoDB Plans (insert in MongoDB Compass)
-
-#### Weekly Plans
-
-```json
-{
-  "name": "Basic Plan",
-  "description": "Lunch Only",
-  "price": 55000,
-  "durationDays": 7,
-  "meals": ["Lunch"],
-  "isActive": true,
-  "billing": "weekly"
-}
-```
-
-```json
-{
-  "name": "Standard Plan",
-  "description": "Dinner Only",
-  "price": 55000,
-  "durationDays": 7,
-  "meals": ["Dinner"],
-  "isActive": true,
-  "billing": "weekly"
-}
-```
-
-```json
-{
-  "name": "Premium Plan",
-  "description": "Lunch + Dinner",
-  "price": 105000,
-  "durationDays": 7,
-  "meals": ["Lunch", "Dinner"],
-  "isActive": true,
-  "billing": "weekly"
-}
-```
-
-#### Monthly Plans
-
-```json
-{
-  "name": "Basic Plan",
-  "description": "Lunch Only",
-  "price": 220000,
-  "durationDays": 30,
-  "meals": ["Lunch"],
-  "isActive": true,
-  "billing": "monthly"
-}
-```
-
-```json
-{
-  "name": "Standard Plan",
-  "description": "Dinner Only",
-  "price": 220000,
-  "durationDays": 30,
-  "meals": ["Dinner"],
-  "isActive": true,
-  "billing": "monthly"
-}
-```
-
-```json
-{
-  "name": "Premium Plan",
-  "description": "Lunch + Dinner",
-  "price": 420000,
-  "durationDays": 30,
-  "meals": ["Lunch", "Dinner"],
-  "isActive": true,
-  "billing": "monthly"
-}
-```
-
-> **Note:** All plans are stored in paise for Razorpay compatibility.
 
 ---
 
 ## 🔄 Application Flow
 
 ```txt
-User signs up (Clerk)
-      ↓
-Clerk webhook → User saved to MongoDB
-      ↓
-User browses plans (GET /api/plans)
-      ↓
-User selects a plan → Address modal opens
-      ↓
-User enters delivery address → Saved to MongoDB
-      ↓
-POST /api/pay → Razorpay order created → Pending subscription saved
-      ↓
-Razorpay checkout opens → User pays
-      ↓
-Razorpay webhook → Signature verified → Subscription activated
-      ↓
-Email notification sent to owner
-      ↓
-User redirected to dashboard
+User Authentication
+        ↓
+Browse Subscription Plans
+        ↓
+Enter Delivery Address
+        ↓
+Create Razorpay Order
+        ↓
+Secure Payment Processing
+        ↓
+Webhook Verification
+        ↓
+Subscription Activation
+        ↓
+Real-Time Owner Notification
 ```
 
 ---
 
-## 🚀 Deployment
+## 🚫 Usage & Access
 
-### Deploy to Vercel
+This repository contains proprietary client work and is shared publicly for portfolio and demonstration purposes only.
 
-```bash
-# Push to GitHub first
-git add .
-git commit -m "initial commit"
-git push
-```
-
-Then import to Vercel at vercel.com and add all environment variables in the Vercel dashboard.
-
-### After deployment update:
-
-1. **Clerk webhook URL** → `https://yourapp.vercel.app/api/webhooks/clerk`
-2. **Razorpay webhook URL** → `https://yourapp.vercel.app/api/webhooks/razorpay`
-3. **Switch Razorpay to live mode** → Replace `rzp_test_` keys with `rzp_live_` keys
-
----
-
-## 📋 Pre-launch Checklist
-
-- [ ] Deploy to Vercel
-- [ ] Update Clerk webhook URL
-- [ ] Update Razorpay webhook URL
-- [ ] Switch to Razorpay live keys
-- [ ] Set up WhatsApp Meta Cloud API
-- [ ] Delete test data from MongoDB
-- [ ] Remove test payment page
-- [ ] Add subscription expiry cron job
-- [ ] Test full flow end to end in production
+Reproduction, redistribution, modification, or commercial use of this codebase or its assets without explicit permission is prohibited.
 
 ---
 
@@ -313,14 +155,16 @@ Built by **Vishesh Gaur**
 
 ---
 
-## 📄 License
+## 📬 Let's Connect
 
-This project is private and not open source.
+If you'd like to discuss this project, collaborate, or work together, feel free to connect through my portfolio.
+
+🔗 Portfolio: https://devishesh.vercel.app/
 
 ---
 
-## 📬 Let's Connect
+## 📄 License
 
-If you'd like to discuss this project, collaborate, or need any help, feel free to reach out through my portfolio.
+All rights reserved.
 
-🔗 Portfolio: https://devishesh.vercel.app/
+This project is private client work and is not open source.
