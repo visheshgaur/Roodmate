@@ -287,6 +287,9 @@ async function handlePayment(plan: Plan) {
           })}
         </div>
       )}
+      <p className="text-center text-sm text-gray-400 mt-8">
+  📅 All plans start from the <span className="font-semibold text-gray-500">next day</span> of payment.
+</p>
     </section>
      <AddressModal
       isOpen={modalOpen}

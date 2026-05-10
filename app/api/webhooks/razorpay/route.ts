@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     }
 
     const event = JSON.parse(body);
-    console.log("Razorpay event:", event.event);
+    // console.log("Razorpay event:", event.event);
 
     if (event.event === "payment.captured") {
       const { order_id, id: payment_id } = event.payload.payment.entity;
@@ -44,7 +44,10 @@ export async function POST(req: Request) {
 
       // Step 2 — store dates in variables first
       const startsAt = new Date();
-      const endsAt = new Date(Date.now() + durationDays * 24 * 60 * 60 * 1000);
+      startsAt.setDate(startsAt.getDate() + 1) // ← starts from next day
+      startsAt.setHours(0, 0, 0, 0)  
+      const endsAt = new Date(startsAt)
+      endsAt.setDate(endsAt.getDate() + durationDays) 
 
       await Subscription.findByIdAndUpdate(sub._id, {
         razorpayPaymentId: payment_id,
