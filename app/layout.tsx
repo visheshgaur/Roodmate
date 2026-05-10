@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Header } from "@/components/shared/Header";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner"
+import { Analytics } from "@vercel/analytics/next";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -40,6 +41,7 @@ export default function RootLayout({
 
         <Toaster position="top-right"/>
         <script src="https://checkout.razorpay.com/v1/checkout.js" />
+        <Analytics />
       </body>
     </html>
     </ClerkProvider>
