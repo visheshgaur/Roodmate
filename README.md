@@ -32,7 +32,7 @@ RoodMates was built to simplify affordable meal subscriptions for students and w
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
-|---|---|
+| --- | --- |
 | Framework | Next.js 14 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS |
@@ -48,6 +48,7 @@ RoodMates was built to simplify affordable meal subscriptions for students and w
 
 ## 📁 Project Structure
 
+```bash
 food-app/
 ├── app/
 │   ├── about/
@@ -104,6 +105,7 @@ food-app/
 ├── .env.local                           # Environment variables
 ├── package.json
 └── README.md
+```
 
 ---
 
@@ -138,6 +140,7 @@ NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/...
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/...
+
 # Razorpay
 RAZORPAY_KEY_ID=rzp_test_...
 RAZORPAY_KEY_SECRET=...
@@ -147,7 +150,6 @@ NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
 # Resend Keys
 RESEND_API_KEY=xxxx
 OWNER_EMAIL=xxxx
-
 ```
 
 ### 4. Run the development server
@@ -164,25 +166,89 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ### MongoDB Plans (insert in MongoDB Compass)
 
-**Weekly Plans:**
+#### Weekly Plans
+
 ```json
-{ "name": "Basic Plan", "description": "Lunch Only", "price": 55000, "durationDays": 7, "meals": ["Lunch"], "isActive": true, "billing": "weekly" }
-{ "name": "Standard Plan", "description": "Dinner Only", "price": 55000, "durationDays": 7, "meals": ["Dinner"], "isActive": true, "billing": "weekly" }
-{ "name": "Premium Plan", "description": "Lunch + Dinner", "price": 105000, "durationDays": 7, "meals": ["Lunch", "Dinner"], "isActive": true, "billing": "weekly" }
+{
+  "name": "Basic Plan",
+  "description": "Lunch Only",
+  "price": 55000,
+  "durationDays": 7,
+  "meals": ["Lunch"],
+  "isActive": true,
+  "billing": "weekly"
+}
 ```
 
-**Monthly Plans:**
 ```json
-{ "name": "Basic Plan", "description": "Lunch Only", "price": 220000, "durationDays": 30, "meals": ["Lunch"], "isActive": true, "billing": "monthly" }
-{ "name": "Standard Plan", "description": "Dinner Only", "price": 220000, "durationDays": 30, "meals": ["Dinner"], "isActive": true, "billing": "monthly" }
-{ "name": "Premium Plan", "description": "Lunch + Dinner", "price": 420000, "durationDays": 30, "meals": ["Lunch", "Dinner"], "isActive": true, "billing": "monthly" }
+{
+  "name": "Standard Plan",
+  "description": "Dinner Only",
+  "price": 55000,
+  "durationDays": 7,
+  "meals": ["Dinner"],
+  "isActive": true,
+  "billing": "weekly"
+}
 ```
-Note-: All Plans are in paise for razorpay compatibility ...
+
+```json
+{
+  "name": "Premium Plan",
+  "description": "Lunch + Dinner",
+  "price": 105000,
+  "durationDays": 7,
+  "meals": ["Lunch", "Dinner"],
+  "isActive": true,
+  "billing": "weekly"
+}
+```
+
+#### Monthly Plans
+
+```json
+{
+  "name": "Basic Plan",
+  "description": "Lunch Only",
+  "price": 220000,
+  "durationDays": 30,
+  "meals": ["Lunch"],
+  "isActive": true,
+  "billing": "monthly"
+}
+```
+
+```json
+{
+  "name": "Standard Plan",
+  "description": "Dinner Only",
+  "price": 220000,
+  "durationDays": 30,
+  "meals": ["Dinner"],
+  "isActive": true,
+  "billing": "monthly"
+}
+```
+
+```json
+{
+  "name": "Premium Plan",
+  "description": "Lunch + Dinner",
+  "price": 420000,
+  "durationDays": 30,
+  "meals": ["Lunch", "Dinner"],
+  "isActive": true,
+  "billing": "monthly"
+}
+```
+
+> **Note:** All plans are stored in paise for Razorpay compatibility.
+
 ---
 
 ## 🔄 Application Flow
 
-```
+```txt
 User signs up (Clerk)
       ↓
 Clerk webhook → User saved to MongoDB
@@ -204,6 +270,7 @@ Email notification sent to owner
 User redirected to dashboard
 ```
 
+---
 
 ## 🚀 Deployment
 
@@ -214,15 +281,15 @@ User redirected to dashboard
 git add .
 git commit -m "initial commit"
 git push
-
-# Then import to Vercel at vercel.com
-# Add all environment variables in Vercel dashboard
 ```
 
+Then import to Vercel at vercel.com and add all environment variables in the Vercel dashboard.
+
 ### After deployment update:
+
 1. **Clerk webhook URL** → `https://yourapp.vercel.app/api/webhooks/clerk`
 2. **Razorpay webhook URL** → `https://yourapp.vercel.app/api/webhooks/razorpay`
-3. **Switch Razorpay to live mode** → replace `rzp_test_` keys with `rzp_live_` keys
+3. **Switch Razorpay to live mode** → Replace `rzp_test_` keys with `rzp_live_` keys
 
 ---
 
@@ -230,7 +297,7 @@ git push
 
 - [ ] Deploy to Vercel
 - [ ] Update Clerk webhook URL
-- [ ] Update Razorpay webhook URL  
+- [ ] Update Razorpay webhook URL
 - [ ] Switch to Razorpay live keys
 - [ ] Set up WhatsApp Meta Cloud API
 - [ ] Delete test data from MongoDB
@@ -257,9 +324,3 @@ This project is private and not open source.
 If you'd like to discuss this project, collaborate, or need any help, feel free to reach out through my portfolio.
 
 🔗 Portfolio: https://devishesh.vercel.app/
-
-
-
-
-
-
