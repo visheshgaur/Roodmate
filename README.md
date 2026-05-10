@@ -93,7 +93,7 @@ food-app/
 │
 ├── lib/
 │   ├── mongodb.ts                       # MongoDB connection utility
-│   └── notify.ts                        # WhatsApp notification utility
+│   └── notify.ts                        # Email Notification Utility
 │
 ├── models/
 │   ├── User.ts                          # User schema
@@ -144,10 +144,10 @@ RAZORPAY_KEY_SECRET=...
 RAZORPAY_WEBHOOK_SECRET=...
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
 
-# WhatsApp (Meta Cloud API)
-WHATSAPP_PHONE_ID=...
-WHATSAPP_TOKEN=...
-OWNER_WHATSAPP_NUMBER=91XXXXXXXXXX
+# Resend Keys
+RESEND_API_KEY=xxxx
+OWNER_EMAIL=xxxx
+
 ```
 
 ### 4. Run the development server
@@ -199,7 +199,7 @@ Razorpay checkout opens → User pays
       ↓
 Razorpay webhook → Signature verified → Subscription activated
       ↓
-WhatsApp notification sent to owner
+Email notification sent to owner
       ↓
 User redirected to dashboard
 ```

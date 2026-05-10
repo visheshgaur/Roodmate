@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Button } from "../ui/Button"
+import Link from "next/link"
 
 export const Aboutus = () => {
   return (
@@ -33,12 +34,12 @@ export const Aboutus = () => {
         <p className="body-text text-base mypara mb-4 mt-4 max-w-xl">
           Yahan har meal care ke saath prepare hota hai, taki aap bina tension ke apna din enjoy kar sako.
         </p>
-         <Button
+         <Link href="/subscription-plan"><Button
             variant="secondary"
             className="border rounded-md py-4 px-6 text-md font-semibold"
           >
             Get a Subscription
-          </Button>
+          </Button></Link>
   </div>
 
 </section>

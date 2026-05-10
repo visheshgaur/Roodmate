@@ -39,7 +39,7 @@ const Footer = () => {
               </p>
               <div className="flex items-center justify-center gap-3 text-2xl font-bold">
                 <FaWhatsapp className="text-green-400 text-3xl" />
-                <span>952-063-4459</span>
+                <a href='https://wa.me/9520634459'><span>952-063-4459</span></a>
               </div>
             </div>
           </div>
