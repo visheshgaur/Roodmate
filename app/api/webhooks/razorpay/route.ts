@@ -47,7 +47,7 @@ export async function POST(req: Request) {
       startsAt.setDate(startsAt.getDate() + 1) // ← starts from next day
       startsAt.setHours(0, 0, 0, 0)  
       const endsAt = new Date(startsAt)
-      endsAt.setDate(endsAt.getDate() + durationDays) 
+      endsAt.setDate(endsAt.getDate() + durationDays-1) 
 
       await Subscription.findByIdAndUpdate(sub._id, {
         razorpayPaymentId: payment_id,
