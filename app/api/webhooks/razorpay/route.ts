@@ -16,6 +16,8 @@ export async function POST(req: Request) {
       .createHmac("sha256", process.env.RAZORPAY_WEBHOOK_SECRET!)
       .update(body)
       .digest("hex");
+ console.log("Expected:", expected);
+console.log("Signature:", signature);
 
     if (expected !== signature) {
       return Response.json({ error: "Invalid signature" }, { status: 400 });
