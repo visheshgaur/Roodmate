@@ -23,7 +23,7 @@ RoodMates was built to simplify affordable daily meal subscriptions for students
 - 💳 **Payments** — Razorpay payment gateway integration
 - ✅ **Instant Activation** — Automatic subscription activation after successful payment
 - 📍 **Delivery Address Management** — User address collection and storage
-- 📲 **Real-Time Notifications** — Instant WhatsApp notifications on every new subscription
+- 📲 **Real-Time Notifications** — Instant Email notifications on every new subscription
 - 📊 **Dashboard** — Subscription tracking with active plan and expiry details
 - 🔄 **Billing Toggle** — Switch between Weekly and Monthly pricing
 
