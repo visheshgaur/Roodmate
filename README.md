@@ -12,7 +12,7 @@ RoodMates was built to simplify affordable daily meal subscriptions for students
 
 ## 🚀 Live Demo
 
-> Coming soon after deployment
+> https://roodmates.com/
 
 ---
 
@@ -40,7 +40,7 @@ RoodMates was built to simplify affordable daily meal subscriptions for students
 | Database | MongoDB Atlas |
 | ODM | Mongoose |
 | Payments | Razorpay |
-| Notifications | WhatsApp Cloud API |
+| Notifications | Resend |
 | Hosting | Vercel |
 
 ---
