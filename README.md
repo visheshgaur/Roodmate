@@ -47,7 +47,6 @@ RoodMates was built to simplify affordable daily meal subscriptions for students
 
 ## 📁 Project Structure
 
-## 📁 Project Structure
 
 ```bash
 food-app/
