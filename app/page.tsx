@@ -2,6 +2,7 @@ import { Aboutus } from "@/components/home/Aboutus";
 import { Faqs } from "@/components/home/Faqs";
 import { Foodquality } from "@/components/home/Foodquality";
 import { Hero } from "@/components/home/Hero";
+import MenuImage from "@/components/home/MenuImage";
 import { MenuSection } from "@/components/home/MenuSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import PlansSection from "@/components/PlansSection";
@@ -13,7 +14,8 @@ export default function Home() {
     <main>
     
       <Hero/>
-      <MenuSection/>
+      {/* <MenuSection/> */}
+      <MenuImage/>
       <Aboutus/>
       <PlansSection/>
       <Foodquality/>

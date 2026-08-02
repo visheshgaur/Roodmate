@@ -1,38 +1,38 @@
 const menuData = [
   {
     day: 'Monday',
-    lunch: 'Mix Veg + Dal + 5 Roti + Rice',
-    dinner: 'Seb Bhaji + Dal + 5 Roti + Rice',
+    lunch: 'Mix Veg + Dal + Roti + Rice',
+    dinner: 'Seb Bhaji + Dal + Roti',
   },
   {
     day: 'Tuesday',
-    lunch: 'Paneer Sabji + Dal + 5 Roti + Rice',
-    dinner: 'Aloo Shimla + 5 Roti + Kheer',
+    lunch: 'Paneer Sabji + Dal + Roti + Rice',
+    dinner: 'Aloo Shimla / Patta Gobhee + Roti + Kheer',
   },
   {
     day: 'Wednesday',
     lunch: 'Veg Pulao + Raita + Salad',
-    dinner: 'Aloo Matar + Dal + 5 Roti + Rice',
+    dinner: 'Aloo Matar + Dal + Roti',
   },
   {
     day: 'Thursday',
-    lunch: 'Chhole ki Sabji + 8 Puri + Achar + Raita',
-    dinner: 'Soyabeen Sabji + Dal + 5 Roti + Rice',
+    lunch: 'Chhach Aloo ki Sabji + Dal + Roti + Rice',
+    dinner: 'Seasonal Sabji + Dal + Roti',
   },
   {
     day: 'Friday',
-    lunch: 'Chhach Aloo ki Sabji + Dal + Rice + 5 Roti',
-    dinner: 'Kadhi + Steamed Rice + 2 Roti',
+    lunch: 'Chhole ki Sabji + Puri + Achar + Raita',
+    dinner: 'Locky Chana + Dal + Roti',
   },
   {
     day: 'Saturday',
-    lunch: 'Aloo Gobhee Sabji + 5 Roti + Raita',
-    dinner: 'Paneer Sabji + Dal + 5 Roti + Rice',
+    lunch: 'Seasonal Sabji + Roti + Raita',
+    dinner: 'Paneer Sabji + Dal + Roti',
   },
   {
     day: 'Sunday',
-    lunch: 'Aloo Sabji + Dal + 5 Roti + Rice',
-    dinner: 'Rajma Aloo + 5 Roti + Rice',
+    lunch: 'Jeera Aloo + Dal + Roti + Rice',
+    dinner: 'Rajma + 2 Roti + Rice',
   },
 ];
 
